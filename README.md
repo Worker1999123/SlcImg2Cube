@@ -11,7 +11,7 @@ Below are the needed python tookits.
 | numpy | OpenCV |
 | pandas | scikit-image |
 | pydicom | vtk |
-| d3 | ovital |
+| d3 | ovito |
 
 ## I/O
 It reads .dcm/.png files. Note that the png files is processed or not, if not please use the "imgprcs" program.
