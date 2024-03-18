@@ -4,7 +4,7 @@ This python based program developed by M5 Lab/SWC Lab demands to build 3d object
 ## Setups
 Below are the needed python tookits. 
 | Toolkit  | |
-| ------------- |
+| ------------- | ------------- |
 | os | tqdm | 
 | random  | seaborn |
 | matplotlib | PIL |
