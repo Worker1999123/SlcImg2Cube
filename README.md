@@ -14,5 +14,13 @@ Below are the needed python tookits.
 | d3 | ovito |
 
 ## I/O
-It reads .dcm/.png files. Note that the png files is processed or not, if not please use the "imgprcs" program.
-For each input, the program outputs folder of slicing dcm files, a stl model, an off model, a xyz model and a data file.
+- It reads .dcm/.png files. Note that the png files is processed or not, if not please use the "imgprcs" program.
+- For each input, the program outputs folder of slicing dcm files, a stl model, an off model, a xyz model and a data file.
+## Processing Stages
+### Stage 0 : Image Processing
+### Stage 0.5 : Curve/Funtion Generation
+### Stage 1 : Image transfer to Dcm Folder
+### Stage 2 : Dcm folder transfer to stl file
+### Stage 2.5 : stl file transfer to off file
+### Stage 3 : Off2particle
+### Stage 4 : xyz file Processes and tranfer to data file
