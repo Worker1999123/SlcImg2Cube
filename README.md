@@ -18,9 +18,9 @@ Below are the needed python tookits.
 - For each input, the program outputs folder of slicing dcm files, a stl model, an off model, a xyz model and a data file.
 ## Processing Stages
 ### Stage 0 : Image Processing
-### Stage 0.5 : Curve/Funtion Generation
+#### Stage 0.5 : Curve/Funtion Generation
 ### Stage 1 : Image transfer to Dcm Folder
 ### Stage 2 : Dcm folder transfer to stl file
-### Stage 2.5 : stl file transfer to off file
+#### Stage 2.5 : stl file transfer to off file
 ### Stage 3 : Off2particle
-### Stage 4 : xyz file Processes and tranfer to data file
+### Stage 4 : xyz file Processing and tranfer to data file
