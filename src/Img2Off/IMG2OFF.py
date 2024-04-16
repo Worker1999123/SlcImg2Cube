@@ -41,27 +41,26 @@ def check_csv(crv_dir):
                     print('Curve file: ' + crv_file)
         if crv_file is None:
             print('Curve file does not exist.')
-            return False
+            return False, None
         else:
-            return True
+            return True, crv_file
     else:
         print('Curve file does not exist.')
-        return False
+        return False, None
 
 #Check if the directories exist, print the file number in each directory, or check the curve.csv file existence ,print the csv file name
-print('Number of DICOM files: ' + str(len([name for name in os.listdir(dcm_dir) if os.path.isfile(os.path.join(dcm_dir, name))]))
-CSV_exst = check_csv(crv_dir)
-print('Number of PNG files: ' + str(len([name for name in os.listdir(png_dir) if os.path.isfile(os.path.join(png_dir, name))]))
-print('Number of SLC folders: ' + str(len([name for name in os.listdir(slc_dir) if os.path.isfile(os.path.join(slc_dir, name))]))
-print('Number of STL files: ' + str(len([name for name in os.listdir(stl_dir) if os.path.isfile(os.path.join(stl_dir, name))]))
+print('Number of DICOM files: ' + str(len([name for name in os.listdir(dcm_dir) if os.path.isfile(os.path.join(dcm_dir, name))])))
+CSV_exst,crv_file = check_csv(crv_dir)
+print('Number of PNG files: ' + str(len([name for name in os.listdir(png_dir) if os.path.isfile(os.path.join(png_dir, name))])))
+print('Number of SLC folders: ' + str(len([name for name in os.listdir(slc_dir) if os.path.isfile(os.path.join(slc_dir, name))])))
+print('Number of STL files: ' + str(len([name for name in os.listdir(stl_dir) if os.path.isfile(os.path.join(stl_dir, name))])))
 
 #Convert the DICOM files to PNG files
-for root, dirs, files in os.walk(dcm_dir):
-    for file in files:
-        if file.endswith('.dcm'):
-            dcm_file = os.path.join(root, file)
-            png_file = os.path.join(png_dir, file.replace('.dcm', '.png'))
-            DCM2PNG.dcm_to_png(dcm_file, png_file)
+for file in os.listdir(dcm_dir):
+    if file.endswith('.dcm'):
+        dcm_file = os.path.join(root, file)
+        png_file = os.path.join(png_dir, file.replace('.dcm', '.png'))
+        DCM2PNG.dcm_to_png(dcm_file, png_file)
 
 #Define basic variables
 margin_range = 2
