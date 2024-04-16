@@ -26,7 +26,7 @@ class BCurve:
 def read_crv(crv_file):
     df = pd.read_csv(crv_file)
     Curve_Matrix = []
-    for i in range(len(df)/4):
+    for i in range(int(len(df)/4)):
         # csv file format: ID X Y
         Curve_ID = df['ID'][i*4]
         curve = BCurve(control_points=[[df['X'][i*4], df['Y'][i*4]], [df['X'][i*4+1], df['Y'][i*4+1]], [df['X'][i*4+2], df['Y'][i*4+2]], [df['X'][i*4+3], df['Y'][i*4+3]]],id=Curve_ID)

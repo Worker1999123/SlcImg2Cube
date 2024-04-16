@@ -62,7 +62,7 @@ def png_to_slc(refer_dcm_file, image, pixel_spacing, num, pos, thickness, output
     image2d = image.astype(np.float16)
 
     meta = pydicom.Dataset()
-    meta.MediaStorageSOPClassUID = pydicom._storage_sopclass_uids.MRImageStorage
+    meta.MediaStorageSOPClassUID = pydicom.uid.ExplicitVRLittleEndian
     meta.MediaStorageSOPInstanceUID = pydicom.uid.generate_uid()
     meta.TransferSyntaxUID = pydicom.uid.ExplicitVRLittleEndian  
 
