@@ -9,16 +9,14 @@ class BCurve:
         self.bezier_curve = bezier_curve
         self.id = id
     def slice(self, n):
-        y_values = np.linspace(0, 1, n+2)
+        y_values = np.linspace(0, 1, n)
         x_values = []
         for y in y_values:
-            for t in np.linspace(0, 1, 100):
-                y_curve = (1 - t) ** 3 * self.control_points[0][1] + 3 * t * (1 - t) ** 2 * self.control_points[1][1] \
-                          + 3 * t ** 2 * (1 - t) * self.control_points[2][1] + t ** 3 * self.control_points[3][1]
-                if abs(y_curve - y) < 0.01:
-                    x_values.append((1 - t) ** 3 * self.control_points[0][0] + 3 * t * (1 - t) ** 2 * self.control_points[1][0] \
-                                    + 3 * t ** 2 * (1 - t) * self.control_points[2][0] + t ** 3 * self.control_points[3][0])
-                    break
+            x_value = (1 - y) ** 3 * self.control_points[0][0] + 3 * y * (1 - y) ** 2 * self.control_points[1][0] \
+                        + 3 * y ** 2 * (1 - y) * self.control_points[2][0] + y ** 3 * self.control_points[3][0]
+            x_values.append(x_value)
+        x_values = np.append(0, x_values)
+        x_values = np.append(x_values, 0)
         return x_values
 
 
