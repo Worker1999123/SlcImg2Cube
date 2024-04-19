@@ -86,17 +86,18 @@ elif png_num == 0:
     print('No PNG files found in the directory: ' + png_dir)
 else:
     print('Converting PNG files to SLC files...')
+    cube_size = 10
     #Define basic variables
     margin_range = 2
     # pixel_spacing = 0.35
     image_size = 106
-    pixel_spacing = 10/(image_size-margin_range*2)
+    pixel_spacing = cube_size/(image_size-margin_range*2)
     n_slices = 101
-    start_pos = pixel_spacing
-    end_pos = 10+pixel_spacing
-    thickness = 10/(n_slices-1)
+    thickness = cube_size/(n_slices-1)
+    start_pos = thickness
+    end_pos = start_pos + cube_size 
     all_pos = np.linspace(start_pos, end_pos, n_slices)
-    all_pos = np.append(0, all_pos)
+    all_pos = np.append(0.0, all_pos)
     all_pos = np.append(all_pos, end_pos+pixel_spacing)
 
 
@@ -119,19 +120,14 @@ else:
                 pts = curve[1]
                 slc_folder = os.path.join(slc_dir, file.replace('.png', '') + '_Curve_' + num_str)
                 os.makedirs(slc_folder, exist_ok=True)
-                for i, pos, pt in zip(range(n_slices), all_pos, pts):
+                for i, pos, pt in zip(range(len(all_pos)), all_pos, pts):
                     img_shifted = PNG2SLC.image_x_shift(img, shift_ratio=pt)
                     img_shifted = PNG2SLC.add_margin(img_shifted, margin_range)
-                    if i == 0 or i == len(all_pos)-1:
+                    if i == 0 or i == n_slices+1:
                         img_shifted = np.zeros_like(img_shifted)
 
                     dcm_path = os.path.join(slc_folder, 'Curve_' + num_str + '_Slice_' + str(i) + '.dcm')
-                    if os.path.exists(dcm_path):
-                        continue
-                    PNG2SLC.png_to_slc(refer_dcm_file, image=img_shifted, pixel_spacing=pixel_spacing, num=num, pos=pos, thickness=thickness, output_path=dcm_path)
-                    #print status: [n out of total png*curve numbers / average time]
-                    # print('Converting ' + file + ' Curve ' + num_str + ' Slice ' + str(i) + ' out of ' + str(png_num*len(Curve_Matrix)) + ' / ' + str(datetime.datetime.now()-start_time))
-
+                    PNG2SLC.png_to_slc(refer_dcm_file, image=img_shifted, pixel_spacing=pixel_spacing, num=num, pos=pos, thickness=thickness, output_path=dcm_path)          
 
 
 print('-----------------------------------------------------')

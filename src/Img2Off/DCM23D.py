@@ -35,6 +35,6 @@ def dcm_to_3d(dcm_dir, output_path):
 
     writer = vtk.vtkSTLWriter()
     writer.SetInputConnection(smoother.GetOutputPort())
-    # writer.SetFileTypeToBinary()
+    writer.SetFileTypeToBinary()
     writer.SetFileName(output_path)
     writer.Write()
