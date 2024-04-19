@@ -5,19 +5,32 @@ DATE_FORMAT=`date +%Y-%m-%d`
 TIME_FORMAT=`date +%T` 
 echo "Today is $DATE_FORMAT and now time is $TIME_FORMAT"
 
-rm ${DATE_FORMAT}_generate_particles.log
-# {
-for model_name in $PWD/mesh_off_model/*; do
-	echo "${model_name}"
-	rootname=$(basename $model_name .off)
-	outputname="${rootname}.xyz"
+SUBMIT_DIR="${PWD}"
+IO_DIR="${SUBMIT_DIR}/io"
+SRC_DIR="${SUBMIT_DIR}/src"
 
-	OFF2Particle/src/off2particle ${model_name} 0.2 ${outputname}
-	
-	mv ${outputname} particle_xyz_model/${outputname}
-done
-# } | tee ${DATE_FORMAT}_generate_particles.log
+PYTHON_EXEC="python3"
+SLC2CUBE_EXEC="${SRC_DIR}/Img2Off/IMG2OFF.py"
+OFF2Particle_EXEC="${SRC_DIR}/OFF2Particle/run_off2particle.sh"
+PTC2DATA_EXEC="${SRC_DIR}/Particle2Cube/ptc2data.py"
 
+# edit mn_dir in Img2Off = Submit_dir 
+sed -i "s|mn_dir = .*|mn_dir = \"${SUBMIT_DIR}\"|g" ${SLC2CUBE_EXEC}
+
+# edit mn_dir in Particle2Cube = Submit_dir
+sed -i "s|mn_dir = .*|mn_dir = \"${SUBMIT_DIR}\"|g" ${PTC2DATA_EXEC}
+
+# edit MAIN_DIR in OFF2Particle = Submit_dir
+sed -i "s|MAIN_DIR = .*|MAIN_DIR = \"${SUBMIT_DIR}\"|g" ${OFF2Particle_EXEC}
+
+# Run slc2cube
+mpirun $PYTHON_EXEC $SLC2CUBE_EXEC
+
+# excute off2particle.sh
+OFF2Particle_EXEC
+
+# Run ptc2data
+mpirun $PYTHON_EXEC $PTC2DATA_EXEC
 # end
 echo ""
 echo "All done"

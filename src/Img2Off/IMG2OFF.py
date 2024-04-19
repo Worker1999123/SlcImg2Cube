@@ -1,19 +1,19 @@
-import DCM2PNG
-import PNG2SLC
-import DCM23D
-import STL2OFF
-import CURVE
+from I2Osrc import DCM2PNG
+from I2Osrc import PNG2SLC
+from I2Osrc import CURVE
+from I2Osrc import DCM23D
+from I2Osrc import STL2OFF
 import os
 import datetime
 import numpy as np
 from tqdm import tqdm
 
-#Get the current working directory
-wrk_dir = os.getcwd()
+#Get the current working directory, path = D:\KL\01_Bone\3d_Gen\MayMenu\SlcImg2Cube-415update\src\Img2Off
+mn_dir = "/mnt/c/Users/allen/Desktop/Results/SLC2CUBE"
+
+wrk_dir = os.path.join(mn_dir, 'src\\Img2Off')
 #Set source directory as the parent directory
 src_dir = os.path.dirname(wrk_dir)
-#Set main directory as the parent directory
-mn_dir = os.path.dirname(src_dir)
 #Set IO directories
 io_dir = os.path.join(mn_dir, 'io')
 
@@ -93,9 +93,9 @@ else:
     image_size = 106
     pixel_spacing = cube_size/(image_size-margin_range*2)
     n_slices = 101
+    start_pos = pixel_spacing
     thickness = cube_size/(n_slices-1)
-    start_pos = thickness
-    end_pos = start_pos + cube_size 
+    end_pos = start_pos + cube_size + pixel_spacing * 2
     all_pos = np.linspace(start_pos, end_pos, n_slices)
     all_pos = np.append(0.0, all_pos)
     all_pos = np.append(all_pos, end_pos+pixel_spacing)
@@ -143,9 +143,30 @@ else:
             slc_folder = os.path.join(slc_dir, folder)
             print('Converting ' + slc_folder + '...')
             stl_file = os.path.join(stl_dir, folder + '.stl')
-            off_file = os.path.join(off_dir, folder + '.off')
-            DCM23D.dcm_to_3d(slc_folder, stl_file)
-            STL2OFF.STLtoOFF(stl_file, off_file)
+            if not os.path.exists(stl_file):
+                DCM23D.dcm_to_3d(slc_folder, stl_file)
+                print('STL file is created: ' + stl_file)
+            else:
+                print('STL file already exists: ' + stl_file)
+
+
+
+print('-----------------------------------------------------')
+#-----------------------------------------------------
+if stl_num == 0:
+    print('No STL files found in the directory: ' + stl_dir)
+else:
+    #Convert the STL files to OFF files
+    for file in tqdm(os.listdir(stl_dir)):
+        if file.endswith('.stl'):
+            stl_file = os.path.join(stl_dir, file)
+            off_file = os.path.join(off_dir, file.replace('.stl', '.off'))
+            print('Converting ' + stl_file + '...')
+            if not os.path.exists(off_file):
+                STL2OFF.STLtoOFF(stl_file, off_file)
+                print('OFF file is created: ' + off_file)
+            else:
+                print('OFF file already exists: ' + off_file)
 
 #-----------------------------------------------------
 print('-----------------------------------------------------')
