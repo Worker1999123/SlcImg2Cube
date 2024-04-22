@@ -9,7 +9,7 @@
 #SBATCH --output=cout.txt
 #SBATCH --error=cerr.txt
 
-sbatch_pre.sh
+# sbatch_pre.sh
 
 echo
 echo "============================ Messages from Goddess ============================"
@@ -52,7 +52,7 @@ sed -i "s|MAIN_DIR = .*|MAIN_DIR = \"${SUBMIT_DIR}\"|g" ${OFF2Particle_EXEC}
 mpirun $PYTHON_EXEC $SLC2CUBE_EXEC
 
 # excute off2particle.sh
-OFF2Particle_EXEC
+sh $OFF2Particle_EXEC
 
 # Run ptc2data
 mpirun $PYTHON_EXEC $PTC2DATA_EXEC
@@ -63,4 +63,4 @@ echo " * Job ended at     : "date
 echo "==============================================================================="
 echo
 
-sbatch_post.sh
+# sbatch_post.sh

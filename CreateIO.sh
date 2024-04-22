@@ -1,3 +1,4 @@
+#!/bin/bash
 #create folders of io
 #Structure:
 #io

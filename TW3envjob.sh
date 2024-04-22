@@ -9,7 +9,7 @@
 #SBATCH --output=cout.txt
 #SBATCH --error=cerr.txt
 
-sbatch_pre.sh
+# sbatch_pre.sh
 
 echo
 echo "============================ Messages from Goddess ============================"
@@ -44,4 +44,4 @@ echo " * Job ended at     : "date
 echo "==============================================================================="
 echo
 
-sbatch_post.sh
+# sbatch_post.sh
