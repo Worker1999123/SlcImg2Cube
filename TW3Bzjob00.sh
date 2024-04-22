@@ -1,11 +1,11 @@
 #!/bin/bash
 #SBATCH --account=MST108404
 #SBATCH --job-name="BzBone00"
-#SBATCH --partition=ct560
+#SBATCH --partition=ct56
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=4
 #SBATCH --gres=gpu:0
-#SBATCH --time=3-0:30:00
+#SBATCH --time=3-0:00:00
 #SBATCH --output=cout.txt
 #SBATCH --error=cerr.txt
 
@@ -24,11 +24,10 @@ echo "==========================================================================
 echo
 
 module purge
-module load rcec/ncl/6.6.2-gcc11
-module load miniconda3/22.11.1-6zzs5sq
-module load lammps/pkg/vtk/9.1.0
-
-source ~/.bashrc
+module load gcc/11.4.0
+module load miniconda3/24.1.2
+module load lammps
+conda activate BzBone
 
 SUBMIT_DIR="${SLURM_SUBMIT_DIR}"
 IO_DIR="${SUBMIT_DIR}/io"
