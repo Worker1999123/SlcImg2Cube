@@ -3,7 +3,7 @@ import os
 import datetime
 from tqdm import tqdm
 import numpy as np
-from ovito import version as ovito_version
+import ovito
 from ovito.io import *
 from ovito.modifiers import *
 from ovito.data import *
@@ -25,7 +25,7 @@ print('Working directory: ' + wrk_dir)
 print('Main directory: ' + mn_dir)
 print('Source directory: ' + src_dir)
 print('Input/Output directory: ' + io_dir)
-print("ovito: %i.%i.%i" % ovito_version)
+print("ovito: %i.%i.%i" % ovito.version)
 print('Starting the conversion process...')
 
 #Set the input and output directories
