@@ -70,7 +70,7 @@ else:
     #Convert the DICOM files to PNG files
     for file in tqdm(os.listdir(dcm_dir)):
         if file.endswith('.dcm'):
-            dcm_file = os.path.join(root, file)
+            dcm_file = os.path.join(dcm_dir, file)
             png_file = os.path.join(png_dir, file.replace('.dcm', '.png'))
             DCM2PNG.dcm_to_png(dcm_file, png_file)
 print('-----------------------------------------------------')
