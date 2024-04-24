@@ -10,11 +10,8 @@ from tqdm import tqdm
 
 #Get the current working directory, path = D:\KL\01_Bone\3d_Gen\MayMenu\SlcImg2Cube-415update\src\Img2Off
 mn_dir = "/mnt/c/Users/allen/Desktop/Results/SLC2CUBE"
-
-wrk_dir = os.path.join(mn_dir, 'src\\Img2Off')
-#Set source directory as the parent directory
-src_dir = os.path.dirname(wrk_dir)
-#Set IO directories
+src_dir = os.path.join(mn_dir, 'src')
+wrk_dir = os.path.join(src_dir, 'Img2Off')
 io_dir = os.path.join(mn_dir, 'io')
 
 print('-----------------------------------------------------')
@@ -94,7 +91,7 @@ else:
     pixel_spacing = cube_size/(image_size-margin_range*2)
     n_slices = 101
     start_pos = pixel_spacing
-    thickness = cube_size/(n_slices-1)
+    thickness = cube_size/(n_slices-2)
     end_pos = start_pos + cube_size + pixel_spacing * 2
     all_pos = np.linspace(start_pos, end_pos, n_slices)
     all_pos = np.append(0.0, all_pos)
@@ -132,7 +129,7 @@ else:
 
 print('-----------------------------------------------------')
 #-----------------------------------------------------
-stl_num = len([name for name in os.listdir(stl_dir) if name.endswith('.stl')])
+slc_num = len([name for name in os.listdir(slc_dir) if os.path.isdir(os.path.join(slc_dir, name))])
 if slc_num == 0:
     print('No SLC folders found in the directory: ' + slc_dir)
 else:
@@ -153,6 +150,7 @@ else:
 
 print('-----------------------------------------------------')
 #-----------------------------------------------------
+stl_num = len([name for name in os.listdir(stl_dir) if name.endswith('.stl')])
 if stl_num == 0:
     print('No STL files found in the directory: ' + stl_dir)
 else:

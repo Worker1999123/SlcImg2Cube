@@ -1,12 +1,10 @@
 #!/bin/bash
-#SBATCH --job-name="envcreate"
-#SBATCH --partition=cpu3g
+#SBATCH --job-name="BzBone00"
+#SBATCH --partition=cpu-3g
 #SBATCH --nodes=1
 #SBATCH --ntasks=4
-#SBATCH --nodelist=
 #SBATCH --gres=gpu:0
 #SBATCH --time=1-00:00
-#SBATCH --chdir=./
 #SBATCH --output=cout.txt
 #SBATCH --error=cerr.txt
 
@@ -24,9 +22,10 @@ echo " * Working directory: "${SLURM_SUBMIT_DIR/$HOME/"~"}
 echo "==============================================================================="
 echo
 
-module load python/3.8.10-gpu-cuda-11.1
+module load opt gcc mpi lammps/mpi
+module load python/3.9.13-cpu
 
-source ~/.bashrc
+source ~/Bone/BzBone/bin/activate
 
 SUBMIT_DIR="${SLURM_SUBMIT_DIR}"
 IO_DIR="${SUBMIT_DIR}/io"
@@ -44,16 +43,16 @@ sed -i "s|mn_dir = .*|mn_dir = \"${SUBMIT_DIR}\"|g" ${SLC2CUBE_EXEC}
 sed -i "s|mn_dir = .*|mn_dir = \"${SUBMIT_DIR}\"|g" ${PTC2DATA_EXEC}
 
 # edit MAIN_DIR in OFF2Particle = Submit_dir
-sed -i "s|MAIN_DIR = .*|MAIN_DIR = \"${SUBMIT_DIR}\"|g" ${OFF2Particle_EXEC}
+sed -i "s|mn_dir=".*"|mn_dir=\"${SUBMIT_DIR}\"|g" ${OFF2Particle_EXEC}
 
 # Run slc2cube
-mpirun $PYTHON_EXEC $SLC2CUBE_EXEC
+$PYTHON_EXEC $SLC2CUBE_EXEC
 
 # excute off2particle.sh
-sh OFF2Particle_EXEC
+sh $OFF2Particle_EXEC
 
 # Run ptc2data
-mpirun $PYTHON_EXEC $PTC2DATA_EXEC
+$PYTHON_EXEC $PTC2DATA_EXEC
 
 echo
 echo "============================ Messages from Goddess ============================"

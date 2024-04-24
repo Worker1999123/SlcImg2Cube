@@ -9,11 +9,11 @@ This python based program developed by M5 Lab/SWC Lab demands to build 3d object
 | ------------- | ------------- |
 | os | tqdm | 
 | random  | seaborn |
-| matplotlib | PIL |
+| ovito | PIL |
 | numpy | OpenCV |
 | pandas | scikit-image |
 | pydicom | vtk |
-| d3 | ovito |
+| d3 |  |
 
 ## I/O
 - It reads .dcm/.png files. Note that the png files is processed or not, if not please use the "imgprcs" program.

@@ -1,4 +1,8 @@
 #!/bin/bash
+#use virtual environment BzBone
+conda init bash
+conda activate BzBone
+
 
 echo "Your bash version : $BASH_VERSION"  
 DATE_FORMAT=`date +%Y-%m-%d` 
@@ -27,7 +31,7 @@ sed -i "s|MAIN_DIR = .*|MAIN_DIR = \"${SUBMIT_DIR}\"|g" ${OFF2Particle_EXEC}
 mpirun $PYTHON_EXEC $SLC2CUBE_EXEC
 
 # excute off2particle.sh
-OFF2Particle_EXEC
+bash $OFF2Particle_EXEC
 
 # Run ptc2data
 mpirun $PYTHON_EXEC $PTC2DATA_EXEC

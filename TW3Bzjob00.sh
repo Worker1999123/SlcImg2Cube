@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --account=MST108404
 #SBATCH --job-name="BzBone00"
-#SBATCH --partition=ct56
+#SBATCH --partition=trans
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=4
 #SBATCH --gres=gpu:0
@@ -44,17 +44,17 @@ sed -i "s|mn_dir = .*|mn_dir = \"${SUBMIT_DIR}\"|g" ${SLC2CUBE_EXEC}
 # edit mn_dir in Particle2Cube = Submit_dir
 sed -i "s|mn_dir = .*|mn_dir = \"${SUBMIT_DIR}\"|g" ${PTC2DATA_EXEC}
 
-# edit MAIN_DIR in OFF2Particle = Submit_dir
-sed -i "s|MAIN_DIR = .*|MAIN_DIR = \"${SUBMIT_DIR}\"|g" ${OFF2Particle_EXEC}
+# edit mn_dir in OFF2Particle.sh = Submit_dir
+sed -i "s|mn_dir=".*"|mn_dir=\"${SUBMIT_DIR}\"|g" ${OFF2Particle_EXEC}
 
-# Run slc2cube
-mpirun $PYTHON_EXEC $SLC2CUBE_EXEC
+# Run slc2cube /not mpirun use python3
+$PYTHON_EXEC $SLC2CUBE_EXEC
 
 # excute off2particle.sh
 sh $OFF2Particle_EXEC
 
 # Run ptc2data
-mpirun $PYTHON_EXEC $PTC2DATA_EXEC
+$PYTHON_EXEC $PTC2DATA_EXEC
 
 echo
 echo "============================ Messages from Goddess ============================"

@@ -3,7 +3,7 @@ import os
 import datetime
 from tqdm import tqdm
 import numpy as np
-import ovito
+from ovito import version as ovito_version
 from ovito.io import *
 from ovito.modifiers import *
 from ovito.data import *
@@ -12,11 +12,8 @@ from ovito.vis import *
 
 #Get the current working directory, path = D:\KL\01_Bone\3d_Gen\MayMenu\SlcImg2Cube-415update\src\Img2Off
 mn_dir = "/mnt/c/Users/allen/Desktop/Results/SLC2CUBE"
-
-wrk_dir = os.path.join(mn_dir, 'src\\Img2Off')
-#Set source directory as the parent directory
-src_dir = os.path.dirname(wrk_dir)
-#Set IO directories
+src_dir = os.path.join(mn_dir, 'src')
+wrk_dir = os.path.join(src_dir, 'Img2Off')
 io_dir = os.path.join(mn_dir, 'io')
 
 print('-----------------------------------------------------')
@@ -28,7 +25,7 @@ print('Working directory: ' + wrk_dir)
 print('Main directory: ' + mn_dir)
 print('Source directory: ' + src_dir)
 print('Input/Output directory: ' + io_dir)
-print("ovito: %i.%i.%i" % ovito.version)
+print("ovito: %i.%i.%i" % ovito_version)
 print('Starting the conversion process...')
 
 #Set the input and output directories

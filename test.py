@@ -1,18 +1,7 @@
-import os
 import datetime
-from tqdm import tqdm
 import numpy as np
 import ovito
-from ovito.io import *
-from ovito.modifiers import *
-from ovito.data import *
-from ovito.pipeline import *
-from ovito.vis import *
-import torch
-import torchvision
-import torchsummary
 import PIL
-import matplotlib
 import pandas as pd
 import seaborn as sns
 import sklearn
@@ -21,7 +10,6 @@ import pydicom
 import cv2
 import skimage
 import scipy
-import random
 
 print('-----------------------------------------------------')
 print('Start time: ' + str(datetime.datetime.now()))
@@ -29,10 +17,7 @@ print('-----------------------------------------------------')
 print('Environment setup...')
 #Print the version of the packages
 print("ovito: %i.%i.%i" % ovito.version)
-print("torch: %s" % torch.__version__)
-print("torchvision: %s" % torchvision.__version__)
 print("PIL: %s" % PIL.__version__)
-print("matplotlib: %s" % matplotlib.__version__)
 print("pandas: %s" % pd.__version__)
 print("seaborn: %s" % sns.__version__)
 print("sklearn: %s" % sklearn.__version__)
