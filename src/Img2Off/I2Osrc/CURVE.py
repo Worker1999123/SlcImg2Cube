@@ -57,7 +57,7 @@ class BCurve:
 
 #old version
 #CM = [Curve_ID , [all points]] 
-def read_crv(crv_file):
+def read_crv(crv_file, n_slices=101):
     df = pd.read_csv(crv_file)
     Curve_Matrix = []
     for i in range(int(len(df)/4)):
@@ -69,7 +69,7 @@ def read_crv(crv_file):
     return Curve_Matrix
 
 #new version
-def read_bcrv(bcrv_file):
+def read_bcrv(bcrv_file, n_slices=101):
     df = pd.read_csv(bcrv_file)
     Curve_Matrix = []
     for i in range(len(df)):

@@ -100,7 +100,7 @@ else:
 
     #read the curve.csv file and create slice shift and rotation angle matrix
     #CM = [Curve_ID , [all points]] 
-    Curve_Matrix = CURVE.read_crv(crv_file)
+    Curve_Matrix = CURVE.read_crv(crv_file, n_slices)
     #print(Curve_Matrix)
 
     #'refer.dcm' is under src_dir
