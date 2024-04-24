@@ -89,7 +89,7 @@ else:
     # pixel_spacing = 0.35
     image_size = 106
     pixel_spacing = cube_size/(image_size-margin_range*2)
-    n_slices = 101
+    n_slices = 102
     start_pos = pixel_spacing
     thickness = cube_size/(n_slices-2)
     end_pos = start_pos + cube_size + pixel_spacing * 2
