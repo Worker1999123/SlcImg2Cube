@@ -30,8 +30,20 @@ dcm_dir = os.path.join(io_dir, '0_Dcm')
 crv_dir = os.path.join(io_dir, '0_Curves')
 png_dir = os.path.join(io_dir, '0_Img')
 slc_dir = os.path.join(io_dir, '1_SlcFolder')
+if not os.path.exists(slc_dir):
+    os.makedirs(slc_dir)
 stl_dir = os.path.join(io_dir, '2_StlModel')
+if not os.path.exists(stl_dir):
+    os.makedirs(stl_dir)
 off_dir = os.path.join(io_dir, '2_OffModel')
+if not os.path.exists(off_dir):
+    os.makedirs(off_dir)
+xyz_dir = os.path.join(io_dir, '3_XyzModel')
+if not os.path.exists(xyz_dir):
+    os.makedirs(xyz_dir)
+data_dir = os.path.join(io_dir, '4_DataModel')
+if not os.path.exists(data_dir):
+    os.makedirs(data_dir)
 
 def check_csv(crv_dir):
     if os.path.exists(crv_dir):
@@ -52,8 +64,13 @@ def check_csv(crv_dir):
 
 print('-----------------------------------------------------')
 #Check if the directories exist, print the file number in each directory, or check the curve.csv file existence ,print the csv file name
-dcm_num = len([name for name in os.listdir(dcm_dir) if name.endswith('.dcm')])
-print('Number of DICOM files: ' + str(dcm_num))
+if os.path.exists(dcm_dir):
+    dcm_num = len([name for name in os.listdir(dcm_dir) if name.endswith('.dcm')])
+    print('Number of DICOM files: ' + str(dcm_num))
+else:
+    dcm_num = 0
+    print('No DICOM files found in the directory: ' + dcm_dir)
+    
 CSV_exst,crv_file = check_csv(crv_dir)
 png_num = len([name for name in os.listdir(png_dir) if name.endswith('.png')])
 print('Number of PNG files: ' + str(png_num))
@@ -89,7 +106,7 @@ else:
     # pixel_spacing = 0.35
     image_size = 106
     pixel_spacing = cube_size/(image_size-margin_range*2)
-    n_slices = 101
+    n_slices = 102
     start_pos = pixel_spacing
     thickness = cube_size/(n_slices-2)
     end_pos = start_pos + cube_size + pixel_spacing * 2
@@ -100,7 +117,7 @@ else:
 
     #read the curve.csv file and create slice shift and rotation angle matrix
     #CM = [Curve_ID , [all points]] 
-    Curve_Matrix = CURVE.read_crv(crv_file)
+    Curve_Matrix = CURVE.read_bcrv(crv_file, n_slices)
     #print(Curve_Matrix)
 
     #'refer.dcm' is under src_dir
@@ -145,6 +162,9 @@ else:
                 print('STL file is created: ' + stl_file)
             else:
                 print('STL file already exists: ' + stl_file)
+            #remove the SLC folder
+            os.system('rm -r ' + slc_folder)
+            print('SLC folder is removed: ' + slc_folder)
 
 
 
