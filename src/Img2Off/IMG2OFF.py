@@ -70,7 +70,7 @@ else:
     #Convert the DICOM files to PNG files
     for file in tqdm(os.listdir(dcm_dir)):
         if file.endswith('.dcm'):
-            dcm_file = os.path.join(root, file)
+            dcm_file = os.path.join(dcm_dir, file)
             png_file = os.path.join(png_dir, file.replace('.dcm', '.png'))
             DCM2PNG.dcm_to_png(dcm_file, png_file)
 print('-----------------------------------------------------')
@@ -89,7 +89,7 @@ else:
     # pixel_spacing = 0.35
     image_size = 106
     pixel_spacing = cube_size/(image_size-margin_range*2)
-    n_slices = 101
+    n_slices = 102
     start_pos = pixel_spacing
     thickness = cube_size/(n_slices-2)
     end_pos = start_pos + cube_size + pixel_spacing * 2
@@ -100,7 +100,7 @@ else:
 
     #read the curve.csv file and create slice shift and rotation angle matrix
     #CM = [Curve_ID , [all points]] 
-    Curve_Matrix = CURVE.read_crv(crv_file)
+    Curve_Matrix = CURVE.read_crv(crv_file, n_slices)
     #print(Curve_Matrix)
 
     #'refer.dcm' is under src_dir
