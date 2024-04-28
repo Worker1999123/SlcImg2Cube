@@ -108,7 +108,10 @@ def random_bcrv_csv(n, order, filename='bcurve001.csv', dislocation=0, path='SLC
     file_path = path + filename
     if os.path.exists(file_path):
         for i in range(1, 1000):
-            file_path = path + 'bcurve' + str(i).zfill(3) + '.csv'
+            # filename = 'NAME001.csv' -> filename = 'NAME002.csv'
+            name = filename.split('.')[0]
+            titlename = name[:-3] + str(i).zfill(3) + '.csv'
+            file_path = path + titlename
             if not os.path.exists(file_path):
                 break
     df.to_csv(file_path, index=False)
