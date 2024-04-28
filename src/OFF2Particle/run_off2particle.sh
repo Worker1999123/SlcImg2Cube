@@ -14,6 +14,10 @@ do
 	echo "${model_name}"
 	rootname=$(basename $model_name .off)
 	outputname="${rootname}.xyz"
+	if [ -f ${IO_DIR}/3_XyzModel/${outputname} ]; then
+		echo "File ${outputname} already exists"
+		continue
+	fi
 
 	$OFF2Particle_EXEC ${model_name} 0.2 ${outputname}
 	
