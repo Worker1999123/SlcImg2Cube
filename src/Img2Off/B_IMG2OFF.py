@@ -186,8 +186,7 @@ else:
             else:
                 print('OFF file already exists: ' + off_file)
             #remove the STL file
-            os.system('rm ' + stl_file)
-            print('STL file is removed: ' + stl_file)
+            os.remove(stl_file)
 
 #-----------------------------------------------------
 print('-----------------------------------------------------')
