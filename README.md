@@ -17,8 +17,25 @@ This python based program developed by M5 Lab/SWC Lab demands to build 3d object
 
 Recommend using conda create:
 ```
-code
+conda create -n Cube python=3.10
+conda activate Cube
+conda install vtk
+conda install tqdm
+conda install numpy
+conda install pandas
+conda install scikit-learn
+conda install scikit-image
+conda install pillow
+conda install opencv
+conda install -c conda-forge pydicom
+conda install seaborn
+conda install --strict-channel-priority -c https://conda.ovito.org -c conda-forge ovito=3.10.5
 ```
+Recommend activate excution permission to make sure code is workable.
+```
+chmod +x "path_to_src/off2particle"
+```
+Recommend copy `libOpenGL.so` & `libOpenGL.so.0` [in the source folder](https://github.com/Worker1999123/SlcImg2Cube/tree/main/src/Particle2Cube/lib) to the lib folder of your environment e.g.`.conda/envs/Cube/lib`
 
 ## I/O
 - It reads .dcm/.png files. Note that the png files is processed or not, if not please use the "imgprcs" program.
