@@ -14,6 +14,10 @@ This python based program developed by M5 Lab/SWC Lab demands to build 3d object
 | pandas | scikit-image |
 | pydicom | vtk |
 | d3 |  |
+Recommend using conda create:
+'''
+code
+'''
 
 ## I/O
 - It reads .dcm/.png files. Note that the png files is processed or not, if not please use the "imgprcs" program.
