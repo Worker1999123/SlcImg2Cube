@@ -35,10 +35,11 @@ Recommend activate excution permission to make sure code is workable.
 ```
 chmod +x "path_to_src/off2particle"
 ```
-Recommend copy `libOpenGL.so` & `libOpenGL.so.0` [in the source folder](https://github.com/Worker1999123/SlcImg2Cube/tree/main/src/Particle2Cube/lib) to the lib folder of your environment e.g.`.conda/envs/Cube/lib`
+Recommend copy `libOpenGL.so` & `libOpenGL.so.0` [in the source folder](/src/Particle2Cube/lib) to the lib folder of your environment e.g.`.conda/envs/Cube/lib`
 
 ## I/O
-- It reads .dcm/.png files. Note that the png files is processed or not, if not please use the "imgprcs" program.
+- This program now reads .png files only. Please at least make sure that the image is 1:1 scale and binary present(only dark and light). The function processing .dcm files is under construction.
+  ![]()
 - For each input, the program outputs folder of slicing dcm files, a stl model, an off model, a xyz model and a data file.
 ## Processing Stages
 ### Stage 0 : Image Processing
