@@ -17,8 +17,9 @@ This python based program developed by M5 Lab/SWC Lab demands to build 3d object
 
 Recommend using conda create:
 ```
-conda create -n Cube python=3.10
-conda activate Cube
+conda create -n BzBone python=3.10
+conda activate BzBone
+conda install --strict-channel-priority -c https://conda.ovito.org -c conda-forge ovito=3.10.5
 conda install vtk
 conda install tqdm
 conda install numpy
@@ -29,7 +30,6 @@ conda install pillow
 conda install opencv
 conda install -c conda-forge pydicom
 conda install seaborn
-conda install --strict-channel-priority -c https://conda.ovito.org -c conda-forge ovito=3.10.5
 ```
 Recommend activate excution permission to make sure code is workable.
 ```
