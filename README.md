@@ -35,7 +35,7 @@ Recommend activate excution permission to make sure code is workable.
 ```
 chmod +x "path_to_src/off2particle"
 ```
-Recommend copy `libOpenGL.so` & `libOpenGL.so.0` [in the source folder](/src/Particle2Cube/lib) to the lib folder of your environment e.g.`.conda/envs/Cube/lib`
+Recommend copy `libOpenGL.so` & `libOpenGL.so.0` [in the source folder](/src/Particle2Cube/lib) to the lib folder of your environment e.g.`.conda/envs/BzBone/lib`
 
 ## I/O
 - This program now reads .png files only. Please at least make sure that the image is 1:1 scale and binary present(only dark and light). The function processing .dcm files is under construction.
